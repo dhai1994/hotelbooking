@@ -15,15 +15,18 @@ connectCloudinary();
 
 const app = express();
 
-// Replace * with your front-end origin
-const allowedOrigin = 'http://localhost:5173';
+import cors from "cors";
 
-app.use(
-  cors({
-    origin: allowedOrigin,
-    credentials: true, // Allow cookies to be sent
-  })
-);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://yostay.vercel.app"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // Important for cookies / bearer tokens
+}));
+
 
 // Middleware 
 app.use(clerkMiddleware());
