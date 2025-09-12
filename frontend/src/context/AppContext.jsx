@@ -25,16 +25,14 @@ export const AppProvider =({children})=>{
   const [searchedCities,setSearchedCities] =useState([])
   const [rooms,setRooms] =useState([])
 
- const fetchRooms = async () => {
+
+const fetchRooms = async () => {
     if (user) {
       await fetchUser();
     }
   };
 
-
-
-
-  const fetchUser = async()=>{
+const fetchUser = async()=>{
     try {
       const {data}= await axios.get('/api/owner',{headers:{Authorization:`Bearer ${await getToken()}`}})
       if(data.success){
@@ -50,16 +48,13 @@ toast.error(data.message)
 
   }
       
-     
-
-
-  useEffect(()=>{
+useEffect(()=>{
   if(user){
     fetchUser()
   }
   },[user])
 
-  useEffect(()=>{
+useEffect(()=>{
 fetchRooms()
   },[])
 

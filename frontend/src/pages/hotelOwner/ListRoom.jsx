@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import Title from "../../components/Title";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+ import {assets} from '../../assets/assets'
+ 
+
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState([]);
-  const { axios, getToken, user } = useAppContext();
+  const { axios, getToken, user,currency } = useAppContext();
 
   // fetch rooms of the hotel owner
   const fetchRooms = async () => {

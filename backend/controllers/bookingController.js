@@ -35,7 +35,12 @@ export const checkAvailabilityAPI = async (req, res) => {
 export const createBooking = async (req, res) => {
   try {
     const { room, checkInDate, checkOutDate, guests } = req.body;
-    const user = req.user._id;
+
+    // Clerk userId from middleware
+    const userId = req.auth?.userId;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+    }
 
     const isAvailable = await checkAvailability({ checkInDate, checkOutDate, room });
     if (!isAvailable) {
@@ -49,12 +54,11 @@ export const createBooking = async (req, res) => {
 
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
-    const night = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
-
-    const totalPrice = roomData.pricePerNight * night;
+    const nights = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
+    const totalPrice = roomData.pricePerNight * nights;
 
     await Booking.create({
-      user,
+      user: userId, // Clerk userId
       room,
       hotel: roomData.hotel._id,
       guests: +guests,
@@ -73,9 +77,16 @@ export const createBooking = async (req, res) => {
 // API: get user bookings
 export const getUserBookings = async (req, res) => {
   try {
-    const user = req.user._id;
-    const bookings = await Booking.find({ user })
-      .populate("room hotel")
+    const userId = req.auth?.userId;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+    }
+
+    const bookings = await Booking.find({ user: userId })
+      .populate({
+        path: "room",
+        populate: { path: "hotel" }, // populate hotel inside room
+      })
       .sort({ createdAt: -1 });
 
     res.json({ success: true, bookings });
@@ -87,7 +98,12 @@ export const getUserBookings = async (req, res) => {
 // API: get hotel bookings
 export const getHotelBookings = async (req, res) => {
   try {
-    const hotel = await Hotel.findOne({ owner: req.user._id });
+    const ownerId = req.auth?.userId;
+    if (!ownerId) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+    }
+
+    const hotel = await Hotel.findOne({ owner: ownerId });
 
     if (!hotel) {
       return res.json({ success: false, message: "No Hotel found" });
