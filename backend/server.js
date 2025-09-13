@@ -1,6 +1,5 @@
 import express from 'express';
 import "dotenv/config";
-import cors from 'cors';
 import connectDB from './configs/db.js';
 import { clerkMiddleware } from '@clerk/express';
 import clerkWebhooks from './controllers/clerkWebhooks.js';
@@ -15,22 +14,11 @@ connectCloudinary();
 
 const app = express();
 
-import cors from "cors";
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://yostay.vercel.app"
-];
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true, // Important for cookies / bearer tokens
-}));
-
+// Since Vercel will handle CORS, you can simplify the server logic
+app.use(express.json());
 
 // Middleware 
 app.use(clerkMiddleware());
-app.use(express.json());
 
 // API to listen to Clerk webhooks
 app.use("/api/clerk", clerkWebhooks);
