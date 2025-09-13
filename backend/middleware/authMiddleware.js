@@ -2,6 +2,11 @@ import User from "../models/User.js";
 
 // Middleware to check if the user is authenticated
 export const protect = async (req, res, next) => {
+  // Allow preflight OPTIONS requests to pass without authentication.
+  if (req.method === 'OPTIONS') {
+    return next();
+  }
+
   try {
     // Extract the userId from the auth object provided by Clerk's middleware.
     const { userId } = req.auth;
