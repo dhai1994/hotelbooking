@@ -2,7 +2,7 @@ import React from 'react'
 import Home from './pages/Home'
 import RoomDetails from './pages/RoomDetails'
 
-import Navbar from './components/navbar'
+import Navbar from './components/Navbar.jsx'
 import HotelReg from './components/HotelReg'
 import { Route,Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
