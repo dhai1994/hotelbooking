@@ -2,7 +2,8 @@ import React from 'react'
 import Home from './pages/Home'
 import RoomDetails from './pages/RoomDetails'
 
-import Navbar from './components/Navbar.jsx'
+
+import Navbar from './components/navbar'
 import HotelReg from './components/HotelReg'
 import { Route,Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
@@ -12,21 +13,14 @@ import Dashboard from './pages/hotelOwner/Dashboard'
 import AddRoom from './pages/hotelOwner/AddRoom'
 import ListRoom from './pages/hotelOwner/ListRoom'
 import Layout from './pages/hotelOwner/Layout'
-import {Toaster} from "react-hot-toast"
-import { useAppContext } from './context/AppContext'
 
 
 const App = () => {
 
-  const {showHotelReg}= useAppContext()
   const isOwnerPath =useLocation().pathname.includes("owner")
   return (
     <div>
-       <Toaster/>
-
-
       { !isOwnerPath &&  <Navbar/>}
-      { showHotelReg &&  <HotelReg/>}
       { false && <HotelReg/>}
       <div className='min-h-[70vh]'>
         <Routes>
@@ -34,7 +28,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/rooms' element={<AllRooms/>} />
           <Route path='/rooms/:id' element={<RoomDetails/>} />
-          <Route path='/my-bookings' element={<MyBookings/>} />
+          <Route path='/my-bookings' element={<mYBookings/>} />
              <Route path='/owner' element={<Layout/>}>
              <Route index element={<Dashboard/>}/>
              <Route path='add-room' element={<AddRoom/>}/>
@@ -46,11 +40,8 @@ const App = () => {
 
       </div>
       <Footer/>
-     
     </div>
-    
   )
- 
 }
 
 export default App

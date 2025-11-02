@@ -1,9 +1,7 @@
 import React from "react";
-import { Link ,  useLocation } from "react-router-dom";
+import { Link , useNavigate , useLocation } from "react-router-dom";
 import {assets} from "../assets/assets.js";
-import { useClerk  , UserButton} from "@clerk/clerk-react";
-import { useAppContext } from "../context/AppContext";
-
+import { useClerk , useUser , UserButton} from "@clerk/clerk-react";
 const BookIcon = () => {
     return (
     <svg className="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
@@ -21,10 +19,9 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const {openSignIn} = useClerk();
-   
+    const {user} = useUser();
+    const navigate = useNavigate();
     const location = useLocation();
-
-    const {user,navigate,isOwner, setShowHotelReg}= useAppContext()
     // React.useEffect(() => {
     //     if(location.pathName !== '/'){
     //         setIsScrolled(true);
@@ -75,9 +72,9 @@ const Navbar = () => {
                             <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                         </a>
                     ))}
-                   { user  && (   <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick={() =>isOwner? navigate('/owner'):setShowHotelReg(true)}>
-                           {isOwner ?'Dashboard':'List Your Hotel'}
-                        </button>)}
+                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`} onClick={() => navigate('/owner')}>
+                        Dashboard
+                    </button>
                 </div>
 
                 {/* Desktop Right */}
