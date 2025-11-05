@@ -17,7 +17,7 @@
 "dest": "server.js",
 "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 "headers": {
-        "Access-Control-Allow-Origin": "https://yostay.vercel.app, http://localhost:5173",
+        
         "Access-Control-Allow-Origin": "https://yostay.vercel.app",
 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
 "Access-Control-Allow-Headers": "Content-Type, Authorization",
