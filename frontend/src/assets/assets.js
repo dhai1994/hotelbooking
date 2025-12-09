@@ -37,9 +37,19 @@ import listIcon from "./listIcon.svg";
 import uploadArea from "./uploadArea.svg";
 import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
+import freeParkingIcon from './freeParkingIcon.svg'; 
+import washingMachineIcon from './washingMachineIcon.svg'; 
+import acIcon from './acIcon.svg'; 
+//import fireplaceIcon from './fireplaceIcon.svg'; 
+import tvIcon from './tvIcon.svg'; 
+//import heatingIcon from './heatingIcon.svg'; 
+//import barbecueIcon from './barbecueIcon.svg';
 
 
 export const assets = {
+     exclusiveOfferCardImg1,
+  exclusiveOfferCardImg2,
+  exclusiveOfferCardImg3,
     logo,
     searchIcon,
     userIcon,
@@ -72,6 +82,14 @@ export const assets = {
     uploadArea,
     totalBookingIcon,
     totalRevenueIcon,
+    freeParkingIcon,
+    washingMachineIcon,
+    acIcon,
+    tvIcon,
+    /*fireplaceIcon,
+    
+    heatingIcon,
+    barbecueIcon,*/
 }
 
 export const cities = [
