@@ -16,7 +16,7 @@ connectCloudinary();
 const app = express();
 
 // Replace * with your front-end origin
-const allowedOrigins = [
+const allowedOrigin = [
   "http://localhost:5173",
   "https://yostay.vercel.app"
 ];
