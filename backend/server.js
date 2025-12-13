@@ -29,6 +29,9 @@ app.use(
   })
 );
 
+// Allow preflight requests
+app.options('*', cors());
+
 // Middleware 
 app.use(clerkMiddleware());
 app.use(express.json());
