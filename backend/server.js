@@ -32,9 +32,11 @@ app.use(
 // Allow preflight requests
 app.options('*', cors());
 
+
 // Middleware 
-app.use(clerkMiddleware());
 app.use(express.json());
+app.use(clerkMiddleware());
+
 
 // API to listen to Clerk webhooks
 app.use("/api/clerk", clerkWebhooks);
