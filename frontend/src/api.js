@@ -1,7 +1,12 @@
 // src/api.js
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_BACKEND_URL || window.location.origin;
+const baseURL =
+  import.meta.env.VITE_BACKEND_URL ||
+  (import.meta.env.DEV
+    ? "http://localhost:3000/api"
+    : window.location.origin + "/api");
+
 
 const api = axios.create({
   baseURL,
